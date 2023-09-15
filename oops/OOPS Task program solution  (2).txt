@@ -1,0 +1,422 @@
+Q!;
+===
+public interface Base {
+    double getCost();
+    String getDescription();
+}
+
+public class StandardBase implements Base {
+    private final double cost = 5.0;
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Standard Base";
+    }
+}
+
+public class SoftBase implements Base {
+    private final double cost = 6.0;
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Soft Base";
+    }
+}
+
+public interface Topping {
+    double getCost();
+    String getDescription();
+}
+
+
+public class TomatoTopping implements Topping {
+    private final double cost = 1.0;
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Tomato Topping";
+    }
+}
+
+public class CornTopping implements Topping {
+    private final double cost = 1.5;
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Corn Topping";
+    }
+}
+
+public class MushroomTopping implements Topping {
+    private final double cost = 2.0;
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Mushroom Topping";
+    }
+}
+
+public class Pizza {
+    private Base base;
+    private List<Topping> toppings;
+
+    public Pizza(Base base) {
+        this.base = base;
+        this.toppings = new ArrayList<>();
+    }
+
+    public void addTopping(Topping topping) {
+        toppings.add(topping);
+    }
+
+    public double calculateCost() {
+        double totalCost = base.getCost();
+        for (Topping topping : toppings) {
+            totalCost += topping.getCost();
+        }
+        return totalCost;
+    }
+
+    public String getDescription() {
+        StringBuilder description = new StringBuilder();
+        description.append("Pizza with ").append(base.getDescription()).append(" and toppings: ");
+        for (Topping topping : toppings) {
+            description.append(topping.getDescription()).append(", ");
+        }
+       
+        return description;
+    }
+}
+
+
+public class PizzaShop {
+    public static void main(String[] args) {
+        Base standardBase = new StandardBase();
+        Base softBase = new SoftBase();
+
+        Topping tomato = new TomatoTopping();
+        Topping corn = new CornTopping();
+        Topping mushroom = new MushroomTopping();
+
+        Pizza pizza1 = new Pizza(standardBase);
+        pizza1.addTopping(tomato);
+        pizza1.addTopping(corn);
+
+        Pizza pizza2 = new Pizza(softBase);
+        pizza2.addTopping(tomato);
+        pizza2.addTopping(corn);
+        pizza2.addTopping(mushroom);
+
+        System.out.println("Pizza 1: " + pizza1.getDescription());
+        System.out.println("Cost: $" + pizza1.calculateCost());
+
+        System.out.println("Pizza 2: " + pizza2.getDescription());
+        System.out.println("Cost: $" + pizza2.calculateCost());
+    }
+}
+
+Q2:
+==
+public interface Flower {
+    double getCost();
+}
+
+public class Rose implements Flower {
+    private final double cost = 1.0;
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+}
+
+public class Jasmine implements Flower {
+    private final double cost = 2.0;
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+}
+
+
+public class Lily implements Flower {
+    private final double cost = 3.0;
+
+    @Override
+    public double getCost() {
+        return cost;
+    }
+}
+
+public class Bouquet {
+    private List<Flower> flowers;
+
+    public Bouquet() {
+        this.flowers = new ArrayList<>();
+    }
+
+    public void addFlower(Flower flower) {
+        flowers.add(flower);
+    }
+
+    public double calculateCost() {
+        double totalCost = 0.0;
+        for (Flower flower : flowers) {
+            totalCost += flower.getCost();
+        }
+        return totalCost;
+    }
+}
+
+public class FlowerShop {
+    public static void main(String[] args) {
+        Bouquet bouquet = new Bouquet();
+        bouquet.addFlower(new Rose());
+        bouquet.addFlower(new Jasmine());
+        bouquet.addFlower(new Lily());
+
+        System.out.println("Cost of the bouquet: $" + bouquet.calculateCost());
+    }
+}
+
+Q3:
+==
+
+public interface Sweet {
+    double getWeight();
+}
+
+public class Chocolate implements Sweet {
+    private String name;
+    private double weight;
+
+    public Chocolate(String name, double weight) {
+        this.name = name;
+        this.weight = weight;
+    }
+
+    @Override
+    public double getWeight() {
+        return weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class Candy implements Sweet {
+    private String name;
+    private double weight;
+
+    public Candy(String name, double weight) {
+        this.name = name;
+        this.weight = weight;
+    }
+
+    @Override
+    public double getWeight() {
+        return weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+
+public class Gift {
+    private List<Sweet> sweets;
+
+    public Gift() {
+        this.sweets = new ArrayList<>();
+    }
+
+    public void addSweet(Sweet sweet) {
+        sweets.add(sweet);
+    }
+
+    public double getTotalWeight() {
+        double totalWeight = 0.0;
+        for (Sweet sweet : sweets) {
+            totalWeight += sweet.getWeight();
+        }
+        return totalWeight;
+    }
+
+    public void sortChocolatesByName() {
+    sweets.sort(new Comparator<Sweet>() {
+        @Override
+        public int compare(Sweet s1, Sweet s2) {
+            if (s1 instanceof Chocolate && s2 instanceof Chocolate) {
+                String name1 = ((Chocolate) s1).getName();
+                String name2 = ((Chocolate) s2).getName();
+                return name1.compareTo(name2);
+            }
+            return 0;
+        }
+    });
+}
+
+
+    public List<Sweet> getCandiesInRange(double minWeight, double maxWeight) {
+        List<Sweet> candiesInRange = new ArrayList<>();
+        for (Sweet sweet : sweets) {
+            if (sweet instanceof Candy) {
+                double weight = sweet.getWeight();
+                if (weight >= minWeight && weight <= maxWeight) {
+                    candiesInRange.add(sweet);
+                }
+            }
+        }
+        return candiesInRange;
+    }
+}
+
+public class NewYearsGift {
+    public static void main(String[] args) {
+        Gift gift = new Gift();
+        gift.addSweet(new Chocolate("Milk Chocolate", 50.0));
+        gift.addSweet(new Candy("Toffee", 30.0));
+        gift.addSweet(new Chocolate("Dark Chocolate", 40.0));
+        gift.addSweet(new Candy("Gummy Bears", 20.0));
+
+        System.out.println("Total weight of the gift: " + gift.getTotalWeight() + " grams");
+
+        gift.sortChocolatesByName();
+        System.out.println("Chocolates sorted by name: ");
+        for (Sweet sweet : gift.getSweets()) {
+            if (sweet instanceof Chocolate) {
+                System.out.println(((Chocolate) sweet).getName());
+            }
+        }
+
+        double minWeight = 25.0;
+        double maxWeight = 45.0;
+        List<Sweet> candiesInRange = gift.getCandiesInRange(minWeight, maxWeight);
+        System.out.println("Candies in the weight range of " + minWeight + " to " + maxWeight + " grams: ");
+        for (Sweet sweet : candiesInRange) {
+            if (sweet instanceof Candy) {
+                System.out.println(((Candy) sweet).getName());
+            }
+        }
+    }
+}
+
+Q4:
+==
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public interface Appliance {
+    String getName();
+    int getPowerConsumption();
+}
+
+public class Fan implements Appliance {
+    @Override
+    public String getName() {
+        return "Fan";
+    }
+
+    @Override
+    public int getPowerConsumption() {
+        return 1;
+    }
+}
+
+public class Light implements Appliance {
+    @Override
+    public String getName() {
+        return "Light";
+    }
+
+    @Override
+    public int getPowerConsumption() {
+        return 2;
+    }
+}
+
+public class TV implements Appliance {
+    @Override
+    public String getName() {
+        return "TV";
+    }
+
+    @Override
+    public int getPowerConsumption() {
+        return 3;
+    }
+}
+
+public class Home {
+    private List<Appliance> appliances;
+
+    public Home() {
+        this.appliances = new ArrayList<>();
+    }
+
+    public void addAppliance(Appliance appliance) {
+        appliances.add(appliance);
+    }
+
+    public int calculatePowerConsumption() {
+        int totalPowerConsumption = 0;
+        for (Appliance appliance : appliances) {
+            totalPowerConsumption += appliance.getPowerConsumption();
+        }
+        return totalPowerConsumption;
+    }
+
+    public void sortAppliances(Comparator<Appliance> comparator) {
+        appliances.sort(comparator);
+    }
+}
+
+public class HomeAppliances {
+    public static void main(String[] args) {
+        Home home = new Home();
+        home.addAppliance(new Fan());
+        home.addAppliance(new Light());
+        home.addAppliance(new TV());
+
+        int totalPowerConsumption = home.calculatePowerConsumption();
+        System.out.println("Total power consumption: " + totalPowerConsumption + " units");
+
+       
+        home.sortAppliances(Comparator.comparing(Appliance::getPowerConsumption).reversed());
+
+        System.out.println("Appliances sorted by power consumption (descending order):");
+        for (Appliance appliance : home.getAppliances()) {
+            System.out.println(appliance.getName() + " - " + appliance.getPowerConsumption() + " units");
+        }
+    }
+}
