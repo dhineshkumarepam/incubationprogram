@@ -1,0 +1,64 @@
+
+1)import java.util.*;
+
+public class CollectionsDemo {
+    public static void main(String[] args) {
+        // ArrayList
+        List<String> arrayList = new ArrayList<>();
+        arrayList.add("Apple");
+        arrayList.add("Banana");
+        arrayList.add("Cherry");
+        System.out.println("ArrayList: " + arrayList);
+
+        // LinkedList
+        List<String> linkedList = new LinkedList<>();
+        linkedList.add("Dog");
+        linkedList.add("Cat");
+        linkedList.add("Elephant");
+        System.out.println("LinkedList: " + linkedList);
+
+        // HashMap
+        Map<Integer, String> hashMap = new HashMap<>();
+        hashMap.put(1, "One");
+        hashMap.put(2, "Two");
+        hashMap.put(3, "Three");
+        System.out.println("HashMap: " + hashMap);
+
+        // LinkedHashMap
+        Map<Integer, String> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put(4, "Four");
+        linkedHashMap.put(5, "Five");
+        linkedHashMap.put(6, "Six");
+        System.out.println("LinkedHashMap: " + linkedHashMap);
+
+        // HashSet
+        Set<String> hashSet = new HashSet<>();
+        hashSet.add("Red");
+        hashSet.add("Green");
+        hashSet.add("Blue");
+        System.out.println("HashSet: " + hashSet);
+
+        // LinkedHashSet
+        Set<String> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add("January");
+        linkedHashSet.add("February");
+        linkedHashSet.add("March");
+        System.out.println("LinkedHashSet: " + linkedHashSet);
+
+        // TreeSet
+        Set<String> treeSet = new TreeSet<>();
+        treeSet.add("Zebra");
+        treeSet.add("Lion");
+        treeSet.add("Elephant");
+        System.out.println("TreeSet: " + treeSet);
+
+        // TreeMap
+        Map<String, Integer> treeMap = new TreeMap<>();
+        treeMap.put("One", 1);
+        treeMap.put("Three", 3);
+        treeMap.put("Two", 2);
+        System.out.println("TreeMap: " + treeMap);
+    }
+}
+
+==

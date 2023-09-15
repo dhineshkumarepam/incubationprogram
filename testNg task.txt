@@ -1,0 +1,51 @@
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+public class CalculatorTest {
+    private Calculator calculator;
+
+    @BeforeClass
+    public void setUp() {
+        calculator = new Calculator();
+    }
+
+    @Test
+    public void testAddPositiveNumbers() {
+        int result = calculator.add(3, 4);
+        Assert.assertEquals(result, 7);
+    }
+
+    @Test
+    public void testSubtractPositiveNumbers() {
+        int result = calculator.subtract(10, 4);
+        Assert.assertEquals(result, 6);
+    }
+
+    @Test(expectedExceptions = ArithmeticException.class)
+    public void testDivideByZero() {
+        calculator.divide(5, 0);
+    }
+
+    @AfterClass
+    public void tearDown() {
+        calculator = null;
+    }
+}
+
+
+
+testng.xml
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CalculatorTestSuite">
+    <test name="CalculatorTests">
+        <groups>
+            <run>
+                <include name="positive" />
+            </run>
+        </groups>
+        <classes>
+            <class name="CalculatorTest" />
+        </classes>
+    </test>
+</suite>
