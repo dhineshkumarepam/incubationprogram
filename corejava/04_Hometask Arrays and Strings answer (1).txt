@@ -1,0 +1,137 @@
+
+
+Arrays
+Q1:
+==
+import java.util.Arrays;
+
+public class MissingNumbersDynamic {
+	public static void main(String[] args) {
+		int[] arr = { 1,4, 6,77,100 };
+		boolean[] check = new boolean[100 - 1 + 1];
+
+		for (int i = 0; i < arr.length; i++) {
+			int num = arr[i];
+			if (num >= 1 && num <= 100) {
+				check[num - 1] = true;
+			}
+		}
+		int missingCount = 0;
+		for (boolean isChecked : check) {
+			if (!isChecked) {
+				missingCount++;
+			}
+		}
+
+		int[] missingNumbers = new int[missingCount];
+		int index = 0;
+		for (int i = 0; i < check.length; i++) {
+			if (!check[i]) {
+				missingNumbers[index++] = i + 1;
+			}
+		}
+		
+
+		Arrays.sort(missingNumbers);
+
+		for (int num : missingNumbers) {
+			System.out.println(num);
+		}
+
+
+	}
+}
+
+Q2:
+==
+public class Smallest {
+	public static void main(String[] args) {
+		int[] arr = {5,11,2, 8, 9, 3, 7 ,9};
+		int smallest = arr[0];
+		int secondSmallest = arr[1];
+
+		for (int i = 0; i < arr.length; i++) {
+			int num = arr[i];
+			if (smallest > num) {
+				secondSmallest = smallest;
+				smallest = num;
+			} else if (secondSmallest > num && smallest != num ) {
+				secondSmallest = num;
+			}
+		}
+		System.out.println(smallest);
+		
+	}
+}
+public class Largest {
+	public static void main(String[] args) {
+		int[] arr = {5,11,2, 8, 9, 3, 7 ,9};
+		int largest = arr[0];
+		int secondlargest = arr[1];
+
+		for (int i = 0; i < arr.length; i++) {
+			int num = arr[i];
+			if (largest > num) {
+				secondlargest = largest ;
+				largest = num;
+			} else if (secondlargest > num && largest  != num ) {
+				secondlargest = num;
+			}
+		}
+		System.out.println(largest );
+		
+	}
+}
+
+String
+Q1:
+==
+public class UniqueDuplicateLetters {
+
+	public static void main(String[] args) {
+		String input = "zod kryptonite";
+
+		String duplicate = " ";
+		
+		for (int i = 0; i < input.length(); i++) {
+			char c = input.charAt(i);
+			if (input.indexOf(c) != input.lastIndexOf(c) && duplicate.indexOf(c)==-1) {
+				duplicate += c;
+			}
+
+		}
+		System.out.println(duplicate);
+	}
+
+}
+Q2:
+==
+public class StringRotationChecker {
+    public static boolean areRotations(String str1, String str2) {
+        
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+
+        String concatenatedStr = str1 + str1;
+
+        if (concatenatedStr.contains(str2)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        String str1 = "waterbottle";
+        String str2 = "erbottlewat";
+
+        if (areRotations(str1, str2)) {
+            System.out.println(str2 + " is a rotation of " + str1);
+        } else {
+            System.out.println(str2 + " is not a rotation of " + str1);
+        }
+    }
+}
+
+

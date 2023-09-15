@@ -1,0 +1,59 @@
+
+
+package com.runner;
+import java.util.Scanner;
+
+public class PyramidGenerator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Pyramid");
+        System.out.println("Enter Number:");
+        int rows = scanner.nextInt();
+        System.out.println("Enter X:");
+        int x = scanner.nextInt();
+        int currentNumber = 0;
+
+        System.out.println("\nPyramid with while loop:");
+        int row = 1;
+        while (row <= rows) {
+            int col = 1;
+            while (col <= row) {
+                System.out.print(currentNumber + "\t");
+                currentNumber += x;
+                col++;
+            }
+            System.out.println();
+            row++;
+        }
+
+		currentNumber = 0;
+		System.out.println("\nPyramid with do-while loop:");
+		row = 1;
+		do {
+			int col = 1;
+			do {
+				System.out.print(currentNumber + "\t");
+				currentNumber += x;
+				col++;
+			} while (col <= row);
+			System.out.println();
+			row++;
+		} while (row <= rows);
+
+        
+        currentNumber = 0;
+        System.out.println("\nPyramid with for loop:");
+        for (int i = 1; i <= rows; i++) {
+            for (int j = 1; j <= i; j++) {
+                System.out.print(currentNumber + "\t");
+                currentNumber += x;
+            }
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+}
+
+

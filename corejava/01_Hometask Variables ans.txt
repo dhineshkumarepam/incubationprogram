@@ -1,0 +1,31 @@
+
+Q1:
+==
+public class AppleCount {
+    public static void main(String[] args) {
+        
+        int danielApples = 3;
+        int amberApples = 2;
+
+        int totalApples = danielApples + amberApples;
+
+        System.out.println("Daniel and Amber have a total of " + totalApples + " apples together.");
+    }
+}
+
+Q2:
+==
+public class AppleCount {
+    public static void main(String[] args) {
+       
+        double danielApples = 3.5;
+        double amberApples = 2.5;
+
+        double totalApples = danielApples + amberApples;
+        
+        System.out.println("Daniel and Amber have a total of " + totalApples + " apples together.");
+    }
+}
+
+
+
