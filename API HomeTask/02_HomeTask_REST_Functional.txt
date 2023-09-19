@@ -1,0 +1,234 @@
+Base URL  -> https://jsonplaceholder.typicode.com
+Resources available --> 
+/posts	
+/comments	
+/albums	
+/photos	
+/todos	
+/users
+
+Task 
+1. Verify the number of resources at each resource end point (6 marks)
+2. For each type of resource 
+	a. Get a specific resource data (6 marks)
+		i. verify the response code
+		ii. Verify the response body 
+	b. Modify a specific resource data (6 marks)
+		i. verify the response code
+		ii. Verify the response body
+	c. Delete a specific resource (6 marks)
+		i. verify the response code
+		ii. Verify the response body
+	d. Create your own resource (6 marks)
+		i. verify the response code
+		ii. Verify the response body
+
+
+
+a.import java.io.BufferedReader;
+	import java.io.InputStreamReader;
+	import java.net.HttpURLConnection;
+	import java.net.URL;
+
+	import com.google.gson.JsonObject;
+	import com.google.gson.JsonParser;
+public class GetRestApi {
+	
+
+	
+	    public static void main(String[] args) {
+	        try {
+	            String baseUrl = "https://jsonplaceholder.typicode.com";
+	            String resourceEndpoint = "/comments/1";  
+
+	            URL url = new URL(baseUrl + resourceEndpoint);
+
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	            connection.setRequestMethod("GET");
+
+	            int responseCode = connection.getResponseCode();
+	            System.out.println("Response Code: " + responseCode);
+
+	            if (responseCode == 200) {
+	                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	                StringBuilder responseBuilder = new StringBuilder();
+	                String line;
+	                while ((line = reader.readLine()) != null) {
+	                    responseBuilder.append(line);
+	                }
+	                reader.close();
+
+	                String responseBody = responseBuilder.toString();
+	                System.out.println("Response Body:");
+	                System.out.println(responseBody);
+
+	                JsonObject jsonObject = JsonParser.parseString(responseBody).getAsJsonObject();
+	            } else {
+	                System.out.println("Error: Failed to retrieve data.");
+	            }
+
+	            connection.disconnect();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+b.      import java.io.BufferedReader;
+	import java.io.DataOutputStream;
+	import java.io.InputStreamReader;
+	import java.net.HttpURLConnection;
+	import java.net.URL;
+public class ModifyRestApi {
+	
+
+	    public static void main(String[] args) {
+	        try {
+	            String baseUrl = "https://jsonplaceholder.typicode.com";
+	            String resourceEndpoint = "/todos/2"; 
+	            URL url = new URL(baseUrl + resourceEndpoint);
+
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	            connection.setRequestMethod("PUT");
+	            connection.setRequestProperty("Content-Type", "application/json");
+
+	            String jsonData = "{\"userId\": 1, \"id\": 1, \"title\": \"Updated Title\", \"body\": \"Updated Body\"}";
+
+	            connection.setDoOutput(true);
+	            DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
+
+	            outputStream.writeBytes(jsonData);
+	            outputStream.flush();
+	            outputStream.close();
+
+	            int responseCode = connection.getResponseCode();
+	            System.out.println("Response Code: " + responseCode);
+
+	            if (responseCode == 200 || responseCode == 201) {
+	                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	                StringBuilder responseBuilder = new StringBuilder();
+	                String line;
+	                while ((line = reader.readLine()) != null) {
+	                    responseBuilder.append(line);
+	                }
+	                reader.close();
+
+	                String responseBody = responseBuilder.toString();
+	                System.out.println("Response Body:");
+	                System.out.println(responseBody);
+	            } else {
+	                System.out.println("Error: Failed to modify data.");
+	            }
+
+	            connection.disconnect();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+c.import java.io.BufferedReader;
+	import java.io.InputStreamReader;
+	import java.net.HttpURLConnection;
+	import java.net.URL;
+public class DeleteRestApi {
+
+	    public static void main(String[] args) {
+	        try {
+	            
+	            String baseUrl = "https://jsonplaceholder.typicode.com";
+	            String resourceEndpoint = "/posts/1";  
+
+	           
+	            URL url = new URL(baseUrl + resourceEndpoint);
+
+	           
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	            connection.setRequestMethod("DELETE");
+
+	            
+	            int responseCode = connection.getResponseCode();
+	            System.out.println("Response Code: " + responseCode);
+
+	            if (responseCode == 200 || responseCode == 204) {
+	                
+	                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	                StringBuilder responseBuilder = new StringBuilder();
+	                String line;
+	                while ((line = reader.readLine()) != null) {
+	                    responseBuilder.append(line);
+	                }
+	                reader.close();
+
+	                String responseBody = responseBuilder.toString();
+	                System.out.println("Response Body:");
+	                System.out.println(responseBody);
+	            } else {
+	                System.out.println("Error: Failed to delete the resource.");
+	            }
+
+	          
+	            connection.disconnect();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	
+d.import java.io.BufferedReader;
+	import java.io.DataOutputStream;
+	import java.io.InputStreamReader;
+	import java.net.HttpURLConnection;
+	import java.net.URL;
+public class CreateRestApi {
+	
+
+	    public static void main(String[] args) {
+	        try {
+	            String baseUrl = "https://jsonplaceholder.typicode.com";
+	            String resourceEndpoint = "/posts";  
+
+	            URL url = new URL(baseUrl + resourceEndpoint);
+
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	            connection.setRequestMethod("POST");
+	            connection.setRequestProperty("Content-Type", "application/json");
+
+	            String jsonData = "{\"userId\": 1, \"id\": null, \"title\": \"New Post\", \"body\": \"This is a new post.\"}";
+
+	            connection.setDoOutput(true);
+	            DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
+
+	            outputStream.writeBytes(jsonData);
+	            outputStream.flush();
+	            outputStream.close();
+
+	            int responseCode = connection.getResponseCode();
+	            System.out.println("Response Code: " + responseCode);
+
+	            if (responseCode == 201) {
+	                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	                StringBuilder responseBuilder = new StringBuilder();
+	                String line;
+	                while ((line = reader.readLine()) != null) {
+	                    responseBuilder.append(line);
+	                }
+	                reader.close();
+
+	                String responseBody = responseBuilder.toString();
+	                System.out.println("Response Body:");
+	                System.out.println(responseBody);
+	            } else {
+	                System.out.println("Error: Failed to create the resource.");
+	            }
+
+	            connection.disconnect();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	
+	    
+
+
+

@@ -1,0 +1,142 @@
+﻿task - 1:
+
+Create a PET using the POST call from http://petstore.swagger.io/#/
+
+Request Body:
+{
+  "id": 12345,
+  "category": {
+    "id": 1,
+    "name": "dog"
+  },
+  "name": "snoopie",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+    }
+  ],
+  "status": "pending"
+}
+
+once the pet is created write the test cases using REST assured for the below calls
+
+https://petstore.swagger.io/v2/pet/12345
+GET call
+Validate the below from API response:
+
+That the status code is equal to ‘200’
+That the content type is ‘application/json’
+That if the pet is a ‘dog’
+That its name is ‘snoopie’
+That its current status is ‘pending’
+
+task - 2:(test data might be already present)
+https://jsonplaceholder.typicode.com/users
+GET call
+Validate the below from API response:
+
+That the status code is equal to ‘200’
+That there more than ‘3’ users in the list
+That one of the users has a name of “Ervin Howell”
+
+
+Task 1
+
+	import io.restassured.RestAssured;
+	import io.restassured.response.Response;
+	import org.json.JSONObject;
+	import org.testng.annotations.BeforeClass;
+	import org.testng.annotations.Test;
+
+	import static io.restassured.RestAssured.given;
+	import static org.hamcrest.Matchers.*;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+public class RestApi {
+	    private final String baseUrl = "https://petstore.swagger.io/v2/pet";
+	    private int petId = 12345;
+
+	    @BeforeClass
+	    public void setup() {
+	     
+	        RestAssured.baseURI = baseUrl;
+	    }
+
+	    @Test(priority = 1)
+	    public void testCreatePet() {
+	        
+	        JSONObject requestBody = new JSONObject();
+	        requestBody.put("id", 12345);
+
+	        JSONObject category = new JSONObject();
+	        category.put("id", 1);
+	        category.put("name", "dog");
+	        requestBody.put("category", category);
+
+	        requestBody.put("name", "snoopie");
+
+	       
+	        requestBody.put("photoUrls", new String[]{"string"});
+
+	        JSONObject tag = new JSONObject();
+	        tag.put("id", 0);
+	        tag.put("name", "string");
+	        requestBody.put("tags", new JSONObject[]{tag});
+
+	        requestBody.put("status", "pending");
+
+	       
+	        Response response = given()
+	                .contentType("application/json")
+	                .body(requestBody.toString()) 
+	            .when()
+	                .post()
+	            .then()
+	                .statusCode(anyOf(is(200), is(201))) 
+	                .extract()
+	                .response();
+
+	        response.then().body("name", equalTo("snoopie"));
+	        response.then().body("category.name", equalTo("dog"));
+	        response.then().body("status", equalTo("pending"));
+	    }
+	}
+
+Task2 
+
+	import io.restassured.RestAssured;
+	import org.testng.annotations.BeforeClass;
+	import org.testng.annotations.Test;
+
+	import static io.restassured.RestAssured.given;
+	import static org.hamcrest.Matchers.*;
+public class RestApi {
+	
+
+	    private final String baseUrl = "https://jsonplaceholder.typicode.com";
+
+	    @BeforeClass
+	    public void setup() {
+	        // Set up the base URI for REST Assured
+	        RestAssured.baseURI = baseUrl;
+	    }
+
+	    @Test
+	    public void testGetUsers() {
+	        given()
+	            .when()
+	                .get("/users")
+	            .then()
+	                .statusCode(200) 
+	                .body("size()", greaterThan(3))
+	                .body("find { it.name == 'Ervin Howell' }", notNullValue()); 
+	    }
+	}
+
+
+

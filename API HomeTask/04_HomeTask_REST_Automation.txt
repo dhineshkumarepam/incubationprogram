@@ -1,0 +1,150 @@
+Find the event names which are in English(En) language from below. 
+Verify the list of names returned with expected list of values
+
+End Point : https://events.epam.com/api/v2/events
+
+Hint: 
+- Use http://jsonviewer.stack.hu/ to remove/format the JSON response
+- Use https://groovy-playground.appspot.com/ to verify the Gpath expression you write
+
+	import groovy.json.JsonSlurper
+
+	def jsonSlurper = new JsonSlurper()
+	def object = jsonSlurper.parseText(
+          '{Your JSON response here}'
+)
+
+println(object)
+
+===============================================================
+Task - 2 (20 marks):
+
+openweathermap.org exposes APIs for reading the weather data from various cities. The documentation is at https://openweathermap.org/guide#how
+
+1. Use the below weather end-point to get the current weather details of Hyderabad
+	http://api.openweathermap.org/data/2.5/weather?q=hyderabad&appid={your_key}
+	
+2. Use the coordinates (longitude and latitude) of of the above response to the end-point
+http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={your_key} and verify the below in response
+	- name --> Hyderabad
+	- sys.country --> IN
+	- main.temp_min --> greater than 0
+	- main.temp --> greater than 0
+
+Hint:
+- You need to register in the application and get your API key as mentioned here in your API requests
+	
+
+1. Use the below weather end-point to get the current weather details of Hyderabad
+	http://api.openweathermap.org/data/2.5/weather?q=hyderabad&appid={your_key}
+	public static void main(String[] args) {
+	        try {
+	            String apiKey = "9b25ee0061fed344bf2aac64a452edc0";
+	            String city = "Hyderabad";
+	            String encodedCity = URLEncoder.encode(city, "UTF-8"); // URL encode the city name
+	            String apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + encodedCity + "&appid=" + apiKey;
+
+	            URL url = new URL(apiUrl);
+
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+	            connection.setRequestMethod("GET");
+
+	            int responseCode = connection.getResponseCode();
+
+	            if (responseCode == 200) {
+	                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	                String inputLine;
+	                StringBuffer response = new StringBuffer();
+
+	                while ((inputLine = reader.readLine()) != null) {
+	                    response.append(inputLine);
+	                }
+	                reader.close();
+
+	                System.out.println(response.toString());
+	            } else {
+	                System.out.println("Error: Unable to retrieve data. Response code: " + responseCode);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+2. Use the coordinates (longitude and latitude) of of the above response to the end-point
+http://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={your_key} and verify the below in response
+	- name --> Hyderabad
+	- sys.country --> IN
+	- main.temp_min --> greater than 0
+	- main.temp --> greater than 0
+
+ public static void main(String[] args) {
+	        try {
+	            String apiKey = "9b25ee0061fed344bf2aac64a452edc0";
+	            String city = "Hyderabad";
+	            String apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+
+	            JSONObject hyderabadData = fetchData(apiUrl);
+
+	            if (hyderabadData != null) {
+	                double latitude = hyderabadData.getJSONObject("coord").getDouble("lat");
+	                double longitude = hyderabadData.getJSONObject("coord").getDouble("lon");
+
+	                String secondApiUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
+	                JSONObject hyderabadDataByCoordinates = fetchData(secondApiUrl);
+
+	                if (hyderabadDataByCoordinates != null) {
+	                    String name = hyderabadDataByCoordinates.getString("name");
+	                    String country = hyderabadDataByCoordinates.getJSONObject("sys").getString("country");
+	                    double tempMin = hyderabadDataByCoordinates.getJSONObject("main").getDouble("temp_min");
+	                    double temp = hyderabadDataByCoordinates.getJSONObject("main").getDouble("temp");
+
+	                    if (name.equals("Hyderabad") && country.equals("IN") && tempMin > 0 && temp > 0) {
+	                        System.out.println("Verification successful!");
+	                    } else {
+	                        System.out.println("Verification failed.");
+	                    }
+	                } else {
+	                    System.out.println("Error fetching data for Hyderabad by coordinates.");
+	                }
+	            } else {
+	                System.out.println("Error fetching data for Hyderabad.");
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    private static JSONObject fetchData(String apiUrl) {
+	        try {
+	            URL url = new URL(apiUrl);
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	            connection.setRequestMethod("GET");
+	            int responseCode = connection.getResponseCode();
+
+	            if (responseCode == 200) {
+	                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	                String inputLine;
+	                StringBuilder response = new StringBuilder();
+
+	                while ((inputLine = reader.readLine()) != null) {
+	                    response.append(inputLine);
+	                }
+	                reader.close();
+
+	                return new JSONObject(response.toString());
+	            } else {
+	                System.out.println("Error: Unable to retrieve data. Response code: " + responseCode);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return null;
+	    }
+
+
+
+
+
+
+
