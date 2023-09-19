@@ -1,0 +1,60 @@
+Prepare a framework with demonstrating 
+	- separtion of layers
+	- usage of testNG
+	- usage of BDD [optional]
+	- usage of maven
+	- usage of batch execution 
+	- data driven tests 
+
+
+
+
+
+
+Creating a comprehensive framework with all the requested components is beyond the scope of a simple text response, but I can provide you with a basic outline and guidance on how to structure a Java-based automation framework that incorporates the elements you mentioned:
+
+1. Project Structure:
+   - Create a Maven project for your automation framework. Maven will help manage dependencies and build processes.
+   - Organize your project with a clear separation of layers, such as:
+     - `src/main/java` for production code (e.g., page objects, utilities).
+     - `src/test/java` for test code (e.g., TestNG test classes).
+     - `src/test/resources` for test data and configuration files.
+
+2. TestNG Integration:
+   - Add TestNG as a dependency in your Maven `pom.xml` file.
+   - Create TestNG test classes with appropriate annotations (`@Test`, `@BeforeSuite`, `@BeforeTest`, etc.) to structure your test suites.
+
+3. BDD Integration (Optional):
+   - You can integrate a BDD framework like Cucumber or JBehave if needed. This allows you to write tests in a natural language style.
+   - Create feature files, step definitions, and glue code for BDD tests.
+
+4. Batch Execution:
+   - Implement batch execution by creating a suite XML file in TestNG. This XML file can define the test suites and their execution order.
+   - Use TestNG's XML suite files to run test suites in batches or groups.
+
+5. Data-Driven Tests:
+   - Implement data-driven testing by:
+     - Creating data providers or data sources (e.g., Excel, CSV, databases) to supply test data.
+     - Using TestNG's `@DataProvider` annotation to feed data to your test methods.
+     - Parameterizing your test methods to accept data from the data provider.
+
+6. Framework Layers:
+   - Implement a clear separation of layers:
+     - Page Objects Layer:Create classes that represent web pages, their elements, and actions.
+     - Test Scripts Layer: Write your test scripts using TestNG annotations. Use the page objects to interact with web elements.
+     - Utilities Layer:Include utility classes for common functions like logging, reporting, and handling browser sessions.
+     - Test Data Layer: Manage test data, either through hardcoded data, property files, or data providers.
+
+7. Reporting:
+   - Integrate a reporting tool like ExtentReports or Allure to generate detailed test reports.
+
+8. Version Control:
+   - Use a version control system (e.g., Git) to manage your framework's source code.
+
+9. Continuous Integration (CI):
+   - Set up a CI/CD pipeline (e.g., Jenkins, Travis CI) to automate builds and test executions.
+
+10. Dependencies:
+   - Define and manage your project's dependencies, including Selenium WebDriver for browser automation.
+
+Remember that creating a robust automation framework can be a complex task, and the specifics will depend on your project's requirements and technologies. This outline provides a starting point for you to build upon and customize according to your needs.
