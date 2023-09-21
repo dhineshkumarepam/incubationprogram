@@ -9,5 +9,8 @@ public class IntTest {
 	private void testDo() {
 		System.out.println("can do all things");
 	}
+	private void classGit() {
+
+	}
 
 }
