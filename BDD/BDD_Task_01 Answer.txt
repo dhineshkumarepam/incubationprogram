@@ -1,0 +1,34 @@
+Implement the step definition class, methods and application classes/interfaces for the below feature.
+Feature: Widraw cash from account
+  In order to pay for my daily expenses
+  As an accounter holder
+  I want to withdraw cash
+
+  Scenario: Withdraw cash from account in credit
+    Given I have a balance of $100 in my account
+    When I request $20
+    Then $20 should be dispensed
+	
+
+public class WithdrawCashSteps {
+    private int accountBalance;
+    private int withdrawalAmount;
+    private boolean cashDispensed;
+
+    @Given("I have a balance of ${int} in my account")
+    public void iHaveABalanceOfInMyAccount(int balance) {
+        accountBalance = balance;
+    }
+
+    @When("I request ${int}")
+    public void iRequest(int amount) {
+        withdrawalAmount = amount;
+        cashDispensed = accountBalance >= withdrawalAmount;
+    }
+
+    @Then("${int} should be dispensed")
+    public void shouldBeDispensed(int amount) {
+        assertTrue("Cash should be dispensed", cashDispensed);
+        assertEquals("Incorrect withdrawal amount", amount, withdrawalAmount);
+    }
+}

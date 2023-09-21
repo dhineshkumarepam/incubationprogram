@@ -1,0 +1,215 @@
+1. Configure a Maven project with Cucumber, Selenium-Java & Pico-Container dependencies for working with a web project.
+2. Write features files for below:
+	a. Feature file with all the scenarios for the registration capability in the new online shopping portal (http://automationpractice.com/)
+	b. Feature file with all the scenarios for the sign-in/sign-out capability.
+3. Automate the scenarios writing StepDef, PageObject and using dependency-injection to share states between steps.
+
+
+
+
+
+
+
+2.a
+Feature: Registration Capability
+
+  Background:
+    Given I am on the registration page of the online shopping portal
+    And I am not logged in
+
+  Scenario: User successfully registers with valid information
+    When I enter valid registration details
+    And I click on the 'Register' button
+    Then I should be successfully registered
+    And I should be logged in as a registered user
+
+  Scenario: User tries to register with an existing email address
+    When I enter an email address that is already registered
+    And I enter valid registration details
+    And I click on the 'Register' button
+    Then I should see an error message indicating the email address is already in use
+    And I should not be registered
+
+  Scenario: User tries to register with invalid information
+    When I enter invalid registration details
+    And I click on the 'Register' button
+    Then I should see validation error messages for the invalid fields
+    And I should not be registered
+
+  Scenario: User tries to register with missing information
+    When I leave some required registration fields blank
+    And I click on the 'Register' button
+    Then I should see validation error messages for the missing fields
+    And I should not be registered
+
+  Scenario: User cancels the registration process
+    When I decide not to complete the registration
+    And I click on the 'Cancel' button
+    Then I should be redirected to the homepage
+    And I should not be registered
+
+  Scenario: User clicks on the terms and conditions link during registration
+    When I click on the 'Terms and Conditions' link
+    Then I should be redirected to the terms and conditions page
+    And I can review the terms and conditions
+2.b
+----
+Feature: Sign-In/Sign-Out Capability
+
+  Background:
+    Given I am on the sign-in page of the online shopping portal
+    And I am not logged in
+
+  Scenario: User successfully signs in with valid credentials
+    When I enter valid sign-in credentials
+    And I click on the 'Sign In' button
+    Then I should be successfully signed in
+    And I should see my username displayed on the homepage
+
+  Scenario: User tries to sign in with incorrect credentials
+    When I enter incorrect sign-in credentials
+    And I click on the 'Sign In' button
+    Then I should see an error message indicating invalid credentials
+    And I should not be signed in
+
+  Scenario: User forgot password and requests a password reset
+    When I click on the 'Forgot Password?' link
+    And I enter my email address to request a password reset
+    And I click on the 'Submit' button
+    Then I should see a message indicating that a password reset email has been sent
+
+  Scenario: User successfully signs out
+    Given I am logged in
+    When I click on the 'Sign Out' button
+    Then I should be successfully signed out
+    And I should be redirected to the homepage
+    And I should not see my username displayed
+
+  Scenario: User tries to sign out when not logged in
+    Given I am not logged in
+    When I click on the 'Sign Out' button
+    Then I should not see any changes in my login status
+
+
+
+3.
+
+public class RegistrationStepDefs {
+
+    private WebDriver driver;
+    private RegistrationPage registrationPage;
+    private HomePage homePage;
+
+    @Given("I am on the registration page of the online shopping portal")
+    public void iAmOnRegistrationPage() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        registrationPage = new RegistrationPage(driver);
+        registrationPage.navigateToRegistrationPage();
+    }
+
+    @When("I enter valid registration details")
+    public void iEnterValidRegistrationDetails() {
+        registrationPage.enterValidRegistrationDetails();
+    }
+
+    @And("I click on the 'Register' button")
+    public void iClickRegisterButton() {
+        registrationPage.clickRegisterButton();
+    }
+
+    @Then("I should be successfully registered")
+    public void iShouldBeSuccessfullyRegistered() {
+        homePage = new HomePage(driver);
+        homePage.verifyRegistrationSuccess();
+    }
+}
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class RegistrationPage {
+
+    private WebDriver driver;
+    private By registrationForm = By.id("registration-form");
+    // Add locators for registration form fields and buttons here
+
+    public RegistrationPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void navigateToRegistrationPage() {
+        driver.get("http://automationpractice.com/registration");
+    }
+
+    public void enterValidRegistrationDetails() {
+        // Implement code to enter valid registration details here
+    }
+
+    public void clickRegisterButton() {
+        driver.findElement(By.id("register-button")).click();
+    }
+
+ 
+}
+
+
+public class SignInSignOutStepDefs {
+
+    private WebDriver driver;
+    private SignInPage signInPage;
+    private HomePage homePage;
+
+    @Given("I am on the sign-in page of the online shopping portal")
+    public void iAmOnSignInPage() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        signInPage = new SignInPage(driver);
+        signInPage.navigateToSignInPage();
+    }
+
+    @When("I enter valid sign-in credentials")
+    public void iEnterValidSignInCredentials() {
+        signInPage.enterValidCredentials();
+    }
+
+    @And("I click on the 'Sign In' button")
+    public void iClickSignInButton() {
+        signInPage.clickSignInButton();
+    }
+
+    @Then("I should be successfully signed in")
+    public void iShouldBeSuccessfullySignedIn() {
+        homePage = new HomePage(driver);
+        homePage.verifySignInSuccess();
+    }
+}
+
+
+public class SignInPage {
+
+    private WebDriver driver;
+    private By signInForm = By.id("sign-in-form");
+    
+
+    public SignInPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void navigateToSignInPage() {
+        driver.get("http://automationpractice.com/signin");
+    }
+
+    public void enterValidCredentials() {
+     
+    }
+
+    public void clickSignInButton() {
+        driver.findElement(By.id("signin-button")).click();
+    }
+
+}
+
+
+
