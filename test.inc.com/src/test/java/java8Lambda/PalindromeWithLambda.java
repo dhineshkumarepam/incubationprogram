@@ -1,30 +1,34 @@
 package java8Lambda;
+import java.util.function.Predicate;
 
 public class PalindromeWithLambda {
 
 	    public static void main(String[] args) {
-	        String input = "racecar"; // Replace with your input string
+	        String input = "racecar";
 
-	        boolean isPalindrome = isPalindrome(input);
+	        Predicate<String> isPalindrome = str -> {
+	            str = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+	            int left = 0;
+	            int right = str.length() - 1;
 
-	        String result = isPalindrome ? "The string is a palindrome." : "The string is not a palindrome.";
-	        System.out.println(result);
-	    }
-
-	    
-	    public static boolean isPalindrome(String str) {
-	        str = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-	        int left = 0;
-	        int right = str.length() - 1;
-
-	        while (left < right) {
-	            if (str.charAt(left) != str.charAt(right)) {
-	                return false;
+	            while (left < right) {
+	                if (str.charAt(left) != str.charAt(right)) {
+	                    return false;
+	                }
+	                left++;
+	                right--;
 	            }
-	            left++;
-	            right--;
-	        }
-	        return true;
+	            return true;
+	        };
+
+	        boolean result = isPalindrome.test(input);
+
+	        String message = result ? "The string is a palindrome." : "The string is not a palindrome.";
+	        System.out.println(message);
 	    }
 	}
+
+	
+
+	
 
