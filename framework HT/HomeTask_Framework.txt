@@ -1,15 +1,3 @@
-Prepare a framework with demonstrating 
-	- separtion of layers
-	- usage of testNG
-	- usage of BDD [optional]
-	- usage of maven
-	- usage of batch execution 
-	- data driven tests 
-
-
-
-
-
 
 Creating a comprehensive framework with all the requested components is beyond the scope of a simple text response, but I can provide you with a basic outline and guidance on how to structure a Java-based automation framework that incorporates the elements you mentioned:
 
