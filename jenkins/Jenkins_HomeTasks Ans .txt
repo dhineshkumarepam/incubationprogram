@@ -1,0 +1,55 @@
+
+
+1. Describe in your own words what is Jenkins and what it is used for.
+======================
+ Jenkins is an open-source automation server that is primarily used for continuous integration and continuous delivery (CI/CD) of software projects. It provides a platform for automating various aspects of the software development lifecycle, including building, testing, and deploying applications. Jenkins helps developers and teams streamline the development process, catch integration issues early, and ensure consistent and reliable software releases.
+
+2. What do you need to have installed on your machine before installing Jenkins?
+ for Jenkins Installation**: Before installing Jenkins on your machine, you typically need to have the following prerequisites:
+   - A compatible operating system (e.g., Windows, Linux, macOS).
+   - Java Development Kit (JDK) installed and configured correctly on your machine, as Jenkins is a Java-based application.
+
+3. I recommended to install Jenkins LTS (Long Term Support). Why do you think I favour LTS over the latest Jenkins release? When would it be more appropriate to use the latest Jenkins release? If you are not familiar with the LTS concept, you can read more [here](https://en.wikipedia.org/wiki/Long-term_support).
+ Jenkins LTS (Long Term Support) releases are favored for stability and long-term support. They receive bug fixes and security updates over an extended period, making them a reliable choice for production environments. LTS releases are suitable when you prioritize stability and don't want to frequently update Jenkins. However, if you need the latest features, improvements, and plugin updates, you might opt for the latest Jenkins release. It's more appropriate to use the latest release in non-production or development environments where you can afford more frequent updates and potential changes.
+
+4. Describe the difference between a job/project and a build.
+ In Jenkins, a "job" or "project" typically represents a specific task or workflow in your CI/CD pipeline. It defines what needs to be done, such as building an application or running tests. A "build" is an instance of executing a job or project, resulting in the compilation, testing, or deployment of code. Multiple builds of the same job/project can occur over time, each triggered by events like code commits or scheduled runs.
+
+5. What is a workspace?
+ A workspace in Jenkins is a dedicated directory on the Jenkins agent (build node) where a job's files and resources are stored during the execution of that job. It serves as a temporary working directory for building, testing, and deploying code. Each job has its own isolated workspace to prevent interference between concurrent builds.
+
+6. What is a build trigger and how would you use it in a job?
+ A build trigger in Jenkins is an event or condition that initiates the execution of a job. Common build triggers include code commits (such as Git hooks), scheduled builds, manual initiation by users, or triggers from other jobs. You use build triggers to automate the build and testing process in response to specific events.
+
+7. What is a parameterized job and when would you use it?
+A parameterized job in Jenkins allows you to define parameters that users can input when triggering the job. Parameters can be customized values (e.g., version numbers, target environments) that users specify at runtime. Parameterized jobs are useful when you want to run the same job with different configurations or inputs without creating multiple job instances.
+
+8. What is meant by Pipeline as Code and Infrastructure as Code?
+   - **Pipeline as Code**: It refers to defining your CI/CD pipelines using code, typically in the form of a Jenkinsfile. This allows you to version control and automate your entire pipeline, making it more reproducible and manageable.
+   - **Infrastructure as Code (IaC)**: IaC is a broader concept that involves defining and provisioning infrastructure (e.g., servers, networks, databases) using code. While Jenkins mainly focuses on application pipelines, IaC tools like Terraform and Ansible manage infrastructure.
+
+9. What are the benefits of using pipelines over normal build jobs in Jenkins?
+ Pipelines provide several advantages over traditional build jobs in Jenkins:
+   Pipeline as Code: Pipelines can be defined and version-controlled as code (Jenkinsfile).
+   Reusability: Pipelines can be reused across different projects.
+   Flexibility: Pipelines support complex workflows, including conditional steps and parallel execution.
+   Visualization: Tools like Blue Ocean offer a modern, visual representation of pipelines.
+   Integration: Pipelines integrate easily with source control systems and other tools.
+
+10. What is a Jenkinsfile?
+ A Jenkinsfile is a text file that defines the entire CI/CD pipeline for a project in a code format. It describes the stages, steps, and configuration of the pipeline, allowing for version control and reproducibility.
+
+11. What are the differences between a declarative pipeline and a scripted pipeline?
+   - Declarative Pipeline: It uses a simplified, structured syntax for defining pipelines and is recommended for simpler use cases. It offers a high-level view of the pipeline and enforces best practices.
+   - Scripted Pipeline: It uses a more flexible, scripted approach with Groovy scripting. It offers more advanced control over the pipeline but requires a deeper understanding of Groovy and Jenkins.
+
+12. Which are the advantages of using Blue Ocean?
+   - Modern User Interface: Blue Ocean provides an intuitive and visually appealing UI for pipeline management.
+   - Visualization: It offers a clear visual representation of pipeline execution, making it easier to understand and troubleshoot.
+   - Git Integration: Blue Ocean seamlessly integrates with Git repositories, enhancing the CI/CD experience for Git users.
+
+13. What is a multibranch pipeline?
+ A multibranch pipeline in Jenkins automatically creates a pipeline for each branch in a Git repository. It's useful for managing and running CI/CD for multiple branches concurrently.
+
+14. What is a pull request?
+ A pull request is a feature of version control systems like Git, where developers propose changes (commits) to a project's codebase. In the context of Jenkins, a pull request can trigger CI/CD pipelines to build and test the proposed changes before merging them into the main codebase. This helps ensure that changes are integrated without introducing issues.
