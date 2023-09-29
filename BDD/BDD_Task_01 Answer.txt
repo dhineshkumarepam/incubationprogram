@@ -32,3 +32,16 @@ public class WithdrawCashSteps {
         assertEquals("Incorrect withdrawal amount", amount, withdrawalAmount);
     }
 }
+import io.cucumber.core.cli.Main;
+
+public class WithdrawCashApplication {
+    public static void main(String[] args) {
+        String[] arguments = {
+            "--glue", "bDD",
+            "src/test/resources" 
+        };
+
+        Main.run(arguments, Thread.currentThread().getContextClassLoader());
+    }
+}
+
