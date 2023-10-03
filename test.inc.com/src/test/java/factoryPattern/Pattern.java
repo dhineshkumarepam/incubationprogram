@@ -9,7 +9,7 @@ public class Pattern {
 	public static void main(String[] args) {
 		
 		 driver = BrowserFactory.getWebDriver(BrowserType.CHROME);
-			driver.get("https://example.com");
+			driver.get("https://www.google.com/");
 
 			driver.quit();
 		

@@ -1,0 +1,3 @@
+Product{name='Example Product', price=19.99, category='Electronics', grade=4}
+Product{name='TV', price=19.99, category='Electronics', grade=4}
+Product{name='Radio', price=19.99, category='Electronics', grade=4}

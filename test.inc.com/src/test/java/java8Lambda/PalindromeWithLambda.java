@@ -5,6 +5,7 @@ public class PalindromeWithLambda {
 
 	    public static void main(String[] args) {
 	        String input = "racecar";
+	        
 
 	        Predicate<String> isPalindrome = str -> {
 	            str = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
