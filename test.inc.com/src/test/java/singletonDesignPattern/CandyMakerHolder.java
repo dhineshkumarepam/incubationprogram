@@ -1,46 +1,53 @@
 package singletonDesignPattern;
 
-import singletonDesignPattern.CandyMaker.CandyMakerHolder;
+
 
 public class CandyMakerHolder {
-	 private static class CandyMakerHolder {
-	        private static final CandyMaker INSTANCE = new CandyMaker();
+	
+	public static class CandyMaker {
+	    private boolean empty;
+	    private boolean boiled;
+
+	    private static CandyMaker instance;
+
+	    private CandyMaker() {
+	        empty = true;
+	        boiled = false;
 	    }
 
-	   
-	    public static CandyMaker getInstance() {
-	        return CandyMakerHolder.INSTANCE;
+	    public static synchronized CandyMaker getInstance() {
+	        if (instance == null) {
+	            instance = new CandyMaker();
+	        }
+	        return instance;
 	    }
 
-
-	    public synchronized void fill() {
+	    public void fill() {
 	        if (isEmpty()) {
 	            empty = false;
 	            boiled = false;
-	          
 	        }
 	    }
 
-	    public synchronized void drain() {
+	    public void drain() {
 	        if (!isEmpty() && isBoiled()) {
-	           
 	            empty = true;
 	        }
 	    }
 
-	    public synchronized void boil() {
+	    public void boil() {
 	        if (!isEmpty() && !isBoiled()) {
-	         
 	            boiled = true;
 	        }
 	    }
 
-	    public synchronized boolean isEmpty() {
+	    public boolean isEmpty() {
 	        return empty;
 	    }
 
-	    public synchronized boolean isBoiled() {
+	    public boolean isBoiled() {
 	        return boiled;
 	    }
+	}
 
 }
