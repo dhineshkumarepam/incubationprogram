@@ -1,8 +1,5 @@
 package constructorReference;
 
-
-	import java.util.function.Function;
-
 	class Task1Employee {
 	    private String name;
 	    private String account;
