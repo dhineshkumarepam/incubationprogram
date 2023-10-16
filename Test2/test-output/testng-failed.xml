@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="testing.TestNNNg">
+        <methods>
+          <include name="testcasesub"/>
+          <include name="testSubtractNegative"/>
+          <include name="testMultiplyNegative"/>
+          <include name="testAddNegative"/>
+          <include name="testDividePositive"/>
+          <include name="testEnd"/>
+          <include name="test1DivideByZero"/>
+          <include name="rretes"/>
+          <include name="testDivideByZeroWithNegativeOperand"/>
+          <include name="testAddPositive"/>
+          <include name="testDivideByZero"/>
+          <include name="testAdd"/>
+          <include name="testSubtractPositive"/>
+          <include name="testMultiplyPositive"/>
+          <include name="teststart"/>
+        </methods>
+      </class> <!-- testing.TestNNNg -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
