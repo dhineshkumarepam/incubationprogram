@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="Test2/src"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/calculator-1.0.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/extentreports-4.0.9.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/jcommander-1.78.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/jquery-3.5.1.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/poi-3.8-beta4.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/poi-5.2.4.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/testng-7.4.0.jar"/>
+	<classpathentry kind="lib" path="Test2/jxljar/jxl-2.6.jar"/>
+	<classpathentry kind="lib" path="Test2/JarFiles/freemarker-2.3.31.jar"/>
+	<classpathentry kind="output" path="Test2/bin"/>
+</classpath>
