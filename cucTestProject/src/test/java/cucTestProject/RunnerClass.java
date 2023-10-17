@@ -7,8 +7,8 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features = {"C:\\Users\\dhineshkumar_selvam\\git\\incubationprogram\\cucTestProject\\src\\test\\java\\featurefile\\login.feature"},
-		glue={""}
+		features = {"src\\test\\java\\featurefile\\login.feature"},
+		glue={"stepDef.CucClass"}
 		
 		)
 public class RunnerClass {
