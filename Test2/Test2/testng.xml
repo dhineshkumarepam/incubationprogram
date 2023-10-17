@@ -7,5 +7,10 @@
       <class name="testing.ParalelTC"/>
     </classes>
   </test> <!-- Test -->
+  <test thread-count="5" name="Teste1">
+    <classes>
+      <class name="testing.TestNNNg"/>
+    </classes>
+  </test> <!-- Test -->
   
 </suite> <!-- Suite -->
